@@ -1,0 +1,22 @@
+{
+  "id": "tetris",
+  "name": "Tetris",
+  "version": "1.0.0",
+  "description": "The classic block-stacking puzzle game",
+  "icon": "/icon.png",
+  "category": "puzzle",
+  "controls": {
+    "keyboard": [
+      "← → to move",
+      "↑ to rotate",
+      "↓ for soft drop",
+      "SPACE for hard drop",
+      "P to pause"
+    ],
+    "touch": true
+  },
+  "players": {
+    "min": 1,
+    "max": 1
+  }
+}

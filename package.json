@@ -1,0 +1,12 @@
+{
+  "name": "tetris",
+  "version": "0.1.0",
+  "description": "Classic Tetris for SATSCADE",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "keywords": ["tetris", "game", "satscade", "startos"],
+  "author": "Ten31",
+  "license": "MIT"
+}

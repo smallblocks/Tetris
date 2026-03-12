@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>TETRIS - SATSCADE</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>TETRIS</h1>
+            <a href="#" class="back-btn" onclick="window.history.back(); return false;">← BACK</a>
+        </div>
+        
+        <div class="game-wrapper">
+            <div class="side-panel left">
+                <div class="stat-box">
+                    <div class="stat-label">SCORE</div>
+                    <div class="stat-value" id="score">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">LEVEL</div>
+                    <div class="stat-value" id="level">1</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">LINES</div>
+                    <div class="stat-value" id="lines">0</div>
+                </div>
+            </div>
+
+            <div class="game-board-container">
+                <canvas id="game-board"></canvas>
+                <div id="overlay" class="overlay hidden">
+                    <div class="overlay-content">
+                        <div id="overlay-title">TETRIS</div>
+                        <div id="overlay-message">Press SPACE to start</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-panel right">
+                <div class="stat-box">
+                    <div class="stat-label">NEXT</div>
+                    <canvas id="next-piece"></canvas>
+                </div>
+                <div class="controls-hint">
+                    <div>← → Move</div>
+                    <div>↑ Rotate</div>
+                    <div>↓ Drop</div>
+                    <div>P Pause</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mobile-controls">
+            <button class="control-btn" id="btn-left">←</button>
+            <button class="control-btn" id="btn-rotate">↻</button>
+            <button class="control-btn" id="btn-right">→</button>
+            <button class="control-btn" id="btn-down">↓</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
