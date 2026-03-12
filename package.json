@@ -1,12 +1,17 @@
 {
-  "name": "tetris",
+  "name": "tetris-startos",
   "version": "0.1.0",
-  "description": "Classic Tetris for SATSCADE",
-  "main": "src/server.js",
+  "private": true,
   "scripts": {
-    "start": "node src/server.js"
+    "build": "rm -rf ./javascript && npx @vercel/ncc build startos/index.ts -o ./javascript",
+    "check": "tsc --noEmit"
   },
-  "keywords": ["tetris", "game", "satscade", "startos"],
-  "author": "Ten31",
-  "license": "MIT"
+  "dependencies": {
+    "@start9labs/start-sdk": "0.4.0-beta.48"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.10",
+    "@vercel/ncc": "^0.38.4",
+    "typescript": "^5.9.3"
+  }
 }

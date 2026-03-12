@@ -3,9 +3,6 @@ name: Build s9pk
 on:
   push:
     branches: [main]
-    tags: ['v*']
-  pull_request:
-    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -16,36 +13,44 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y squashfs-tools-ng
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
 
       - name: Install start-cli
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl -L -o /tmp/start-cli.tar.gz https://github.com/smallblocks/staticrypt-startos/releases/download/tools-v1/start-cli-linux-x86_64.tar.gz
-          sudo tar -xzf /tmp/start-cli.tar.gz -C /usr/local/bin/
-          sudo chmod +x /usr/local/bin/start-cli
-          sudo apt-get update && sudo apt-get install -y squashfs-tools-ng
+          gh release download tools-v1 --repo smallblocks/staticrypt-startos --pattern 'start-cli-linux-x86_64.tar.gz'
+          tar xzf start-cli-linux-x86_64.tar.gz
+          sudo mv start-cli /usr/local/bin/
+          start-cli --version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build JavaScript
+        run: npm run build
 
       - name: Build Docker image
-        run: |
-          docker build -t localhost/tetris:latest .
+        run: docker build -t localhost/tetris:latest .
 
-      - name: Package s9pk
-        run: |
-          start-cli pack
+      - name: Initialize developer key
+        run: start-cli init-key
 
-      - name: Upload s9pk artifact
+      - name: Verify Docker image
+        run: docker images | grep tetris
+
+      - name: Pack s9pk
+        run: start-cli s9pk pack . -o tetris.s9pk --arch x86_64
+
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: tetris-s9pk
-          path: "*.s9pk"
+          path: tetris.s9pk
           retention-days: 30
-
-      - name: Release
-        if: startsWith(github.ref, 'refs/tags/v')
-        uses: softprops/action-gh-release@v1
-        with:
-          files: "*.s9pk"
-          generate_release_notes: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
