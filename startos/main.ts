@@ -20,7 +20,7 @@ export const main = sdk.setupMain(async ({ effects }) => {
   return sdk.Daemons.of(effects).addDaemon('primary', {
     subcontainer,
     exec: {
-      command: ['node', 'server.js'],
+      command: ['node', '/app/server.js'],
       env: {
         PORT: '80',
       },
