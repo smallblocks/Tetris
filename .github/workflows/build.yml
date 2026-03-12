@@ -21,8 +21,8 @@ jobs:
 
       - name: Install start-cli
         run: |
-          curl -L -o /tmp/tools.tar.gz https://github.com/smallblocks/staticrypt-startos/releases/download/tools-v1/startos-tools.tar.gz
-          sudo tar -xzf /tmp/tools.tar.gz -C /usr/local/bin/
+          curl -L -o /tmp/start-cli.tar.gz https://github.com/smallblocks/staticrypt-startos/releases/download/tools-v1/start-cli-linux-x86_64.tar.gz
+          sudo tar -xzf /tmp/start-cli.tar.gz -C /usr/local/bin/
           sudo chmod +x /usr/local/bin/start-cli
           sudo apt-get update && sudo apt-get install -y squashfs-tools-ng
 
