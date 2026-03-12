@@ -1,7 +1,8 @@
-import { sdk } from '../sdk'
+import { VersionGraph } from '@start9labs/start-sdk'
+import { current, other } from './versions'
 
-export const versionGraph = sdk.VersionGraph.of({
-  '0.1.0': {
-    install: sdk.Migration.of({ down: null }),
-  },
+export const versionGraph = VersionGraph.of({
+  current,
+  other,
+  preInstall: async (effects) => {},
 })

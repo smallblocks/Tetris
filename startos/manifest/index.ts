@@ -1,31 +1,28 @@
-import { Manifest } from '@start9labs/start-sdk'
-
 export const manifest = {
-  id: 'tetris',
+  id: 'tetris' as const,
   title: 'Tetris',
-  version: '0.1.0',
-  releaseNotes: 'Initial release - Classic Tetris for SATSCADE',
-  license: 'mit',
+  license: 'MIT',
   wrapperRepo: 'https://github.com/smallblocks/tetris',
   upstreamRepo: 'https://github.com/smallblocks/tetris',
   supportSite: 'https://github.com/smallblocks/tetris/issues',
   marketingSite: 'https://github.com/smallblocks/tetris',
+  donationUrl: null,
   description: {
     short: 'Classic Tetris for SATSCADE',
     long: 'The classic block-stacking puzzle game. Clear lines, score points, and compete for high scores on your sovereign arcade.',
   },
+  images: {
+    main: 'main',
+  },
+  volumes: {
+    main: 'main',
+  },
   assets: [],
-  volumes: ['main'],
-  images: ['main'],
   dependencies: {
     satscade: {
       description: 'SATSCADE arcade launcher',
       optional: false,
     },
-  },
-  hardwareRequirements: {
-    ram: null,
-    arch: null,
   },
   alerts: {
     install: null,
@@ -35,4 +32,5 @@ export const manifest = {
     start: null,
     stop: null,
   },
-} satisfies Manifest
+  hardwareRequirements: {},
+}

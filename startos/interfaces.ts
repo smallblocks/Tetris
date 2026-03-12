@@ -1,20 +1,26 @@
 import { sdk } from './sdk'
 
+const webPort = 80
+
 export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
-  const ui = await sdk.ServiceInterface.ui(effects, {
+  const webMulti = sdk.MultiHost.of(effects, 'web-multi')
+  const webMultiOrigin = await webMulti.bindPort(webPort, {
+    protocol: 'http',
+  })
+
+  const webUi = sdk.createInterface(effects, {
     name: 'Tetris',
     id: 'webui',
     description: 'Play Tetris',
-    hasPrimary: true,
+    type: 'ui',
     masked: false,
     schemeOverride: null,
     username: null,
-  }).addAddress({
-    internalPort: 80,
-    hostId: 'webui',
-    scheme: 'http',
-    sslScheme: 'https',
+    path: '',
+    query: {},
   })
 
-  return [ui]
+  const webReceipt = await webMultiOrigin.export([webUi])
+
+  return [webReceipt]
 })
