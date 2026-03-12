@@ -37,6 +37,7 @@ Requires SATSCADE to be installed first.`,
     satscade: {
       description: 'SATSCADE arcade launcher',
       optional: false,
+      s9pk: null,
     },
   },
 })
