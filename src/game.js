@@ -125,14 +125,11 @@
             case 'ArrowRight':
                 moveRight();
                 break;
-            case 'ArrowUp':
-                rotate();
-                break;
             case 'ArrowDown':
                 softDrop();
                 break;
             case 'Space':
-                hardDrop();
+                rotate();
                 break;
             case 'KeyP':
                 pauseGame();
@@ -353,20 +350,6 @@
 
         // Draw current piece
         if (currentPiece && gameState === 'playing') {
-            // Ghost piece
-            let ghostY = currentPiece.y;
-            while (!collision(0, ghostY - currentPiece.y + 1)) {
-                ghostY++;
-            }
-            currentPiece.shape.forEach((row, y) => {
-                row.forEach((value, x) => {
-                    if (value) {
-                        drawBlock(ctx, currentPiece.x + x, ghostY + y, COLORS[value], true);
-                    }
-                });
-            });
-
-            // Actual piece
             currentPiece.shape.forEach((row, y) => {
                 row.forEach((value, x) => {
                     if (value) {
